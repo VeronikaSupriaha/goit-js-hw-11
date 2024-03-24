@@ -5,12 +5,13 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { fetchUsers } from './js/pixabay-api';
 import { renderUsers } from './js/render-functions';
 const input = document.querySelector('#data-input');
-const searchBtn = document.querySelector('[data-search]');
 const userList = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
+const form = document.querySelector('form');
 
-searchBtn.addEventListener('click', event => {
+form.addEventListener('submit', event => {
   event.preventDefault();
+  console.log('1');
   loader.classList.remove('is-hidden');
   userList.innerHTML = '';
   if (input.value === '') {
@@ -22,15 +23,8 @@ searchBtn.addEventListener('click', event => {
     });
     return;
   }
-  const searchParams = new URLSearchParams({
-    key: '43027284-ae8275f6d108abc1bc2578323',
-    q: input.value,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-  });
-  const url = `https://pixabay.com/api/?${searchParams}`;
-  fetchUsers(url)
+
+  fetchUsers(input.value)
     .then(hits => renderUsers(hits.hits, userList, loader))
     .catch(error => console.log(error));
 });
