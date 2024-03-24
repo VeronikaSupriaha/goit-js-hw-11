@@ -27,4 +27,5 @@ form.addEventListener('submit', event => {
   fetchUsers(input.value)
     .then(hits => renderUsers(hits.hits, userList, loader))
     .catch(error => console.log(error));
+  form.reset();
 });

@@ -4,6 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 export function renderUsers(hits, userList, loader) {
   if (hits.length <= 0) {
+    loader.classList.add('is-hidden');
     throw new Error(
       iziToast.show({
         title: 'Error',
